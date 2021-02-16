@@ -75,7 +75,11 @@ async function getUserInfo(ACCESS_TOKEN: string) {
 }
 
 function getRefreshTokenLocal() {
-  return fs.readFileSync('REFRESH_TOKEN','utf8')
+  try {
+    return fs.readFileSync('REFRESH_TOKEN','utf8')
+  } catch (error) {
+    return process.env.REFRESH_TOKEN
+  }
 }
 
 function getSvg(view: object) {
