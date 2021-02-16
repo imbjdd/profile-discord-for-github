@@ -56,7 +56,7 @@ async function getAccessToken(REFRESH_TOKEN: string) {
 
   try {
     const response = await axios.post(GET_TOKEN_URL, params, config)
-    fs.writeFileSync("REFRESH_TOKEN", response.data.refresh_token)
+    storeRefreshToken(response.data.refresh_token)
     return response.data.access_token
   } catch (e) {
     return e
