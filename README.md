@@ -1,6 +1,6 @@
 # Profile Discord for GitHub
 
-![Spotify](https://profile-discord-for-github.herokuapp.com/api/profile?update)
+![Discord Profile](https://profile-discord-for-github.herokuapp.com/api/profile?update)
 
 ## Setup
 `https://discord.com/api/oauth2/authorize?response_type=code&client_id={{CLIENT_ID}}&scope=identify&redirect_uri=http://localhost:1234/callback/&prompt=none`
