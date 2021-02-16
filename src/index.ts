@@ -129,7 +129,8 @@ app.get('/api/profile', async (req, res) => {
 
   res.writeHead(200, {
    'Content-Type': 'image/svg+xml',
-   'Content-Length': AWESOME_SVG.length
+   'Content-Length': AWESOME_SVG.length,
+   'Cache-Control': 's-maxage=1'
   })
 
   res.end(AWESOME_SVG)
