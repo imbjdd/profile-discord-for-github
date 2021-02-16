@@ -15,3 +15,6 @@ This is a simplest way to link in realtime your Discord profile to any readme. T
 7. You will be redirected on a link like that `http://localhost:1234/callback/?code=yjV0ACm2MweJzxMwY5VA2qCcNrnFVT`, copy the last part `http://localhost:1234/callback/?code={{code}}`, the element `code` and go on `https://yourapp.herokuapp.com/api/exchange_code?code={{code}}`.
 8. Now, store the `refresh_token` variable, create and env variable called `REFRESH_TOKEN` and put in.
 9. The setup is finished, congratulations ! 🎉🎉 Your image link is `https://yourapp.herokuapp.com/api/profile`.
+
+## License
+[Unlicense](https://choosealicense.com/licenses/unlicense/)
