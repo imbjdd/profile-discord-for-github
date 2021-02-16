@@ -2,11 +2,6 @@ import express from 'express'
 const app = express()
 const port = process.env.PORT || 3000
 
-if (process.env.NODE_ENV !== 'production') {
-  // tslint:disable-next-line:no-var-requires
-  require('dotenv').config()
-}
-
 import fs from 'fs'
 import mustache from 'mustache'
 import axios from 'axios'
