@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000
 import fs from 'fs'
 import mustache from 'mustache'
 import axios from 'axios'
+import imageToBase64 from 'image-to-base64'
 
 const GET_TOKEN_URL = 'https://discord.com/api/v8/oauth2/token'
 const INFO_TOKEN_URL = 'https://discord.com/api/v8/users/@me'
@@ -105,8 +106,8 @@ async function getUserInfo(ACCESS_TOKEN: string) {
 
 async function getAvatar(data: any) {
   try {
-    const response = await axios.get('https://cdn.discordapp.com/avatars/'+data.id+'/'+data.avatar+'.png')
-    return 'data:'+response.headers['content-type']+';base64,'+Buffer.from(response.data).toString('base64')
+    const imageBase64 = await imageToBase64('https://cdn.discordapp.com/avatars/'+data.id+'/'+data.avatar+'.png')
+    return imageBase64
   } catch (e) {
     return e
   }
