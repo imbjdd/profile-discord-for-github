@@ -11,7 +11,7 @@ import axios from 'axios'
 
 const REFRESH_TOKEN_URL = 'https://discord.com/api/v8/oauth2/token'
 const INFO_TOKEN_URL = 'https://discord.com/api/v8/users/@me'
-const REDIRECT_URI = 'http://localhost:8080/callback/'
+const REDIRECT_URI = 'http://localhost:1234/callback/'
 
 async function getRefreshToken() {
   const params = new URLSearchParams()
