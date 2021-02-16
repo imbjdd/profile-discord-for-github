@@ -5,7 +5,6 @@ const port = process.env.PORT || 3000
 import fs from 'fs'
 import mustache from 'mustache'
 import axios from 'axios'
-import imageToBase64 from 'image-to-base64'
 
 const GET_TOKEN_URL = 'https://discord.com/api/v8/oauth2/token'
 const INFO_TOKEN_URL = 'https://discord.com/api/v8/users/@me'
