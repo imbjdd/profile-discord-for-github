@@ -9,4 +9,4 @@
 
 `/api/exchange_code?code={{code}}`
 
-put refresh token in REFRESH_TOKEN file
+Create a file named `REFRESH_TOKEN` in the root of application and put the refresh_token variable in.
