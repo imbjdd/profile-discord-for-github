@@ -2,8 +2,10 @@ import express from 'express'
 const app = express()
 const port = process.env.PORT || 3000
 
-import dotenv from 'dotenv';
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  // tslint:disable-next-line:no-var-requires
+  require('dotenv').config()
+}
 
 import fs from 'fs'
 import mustache from 'mustache'
@@ -33,8 +35,6 @@ async function getAccessToken(REFRESH_TOKEN: string) {
     fs.writeFileSync("REFRESH_TOKEN", response.data.refresh_token)
     return response.data.access_token
   } catch (e) {
-    // tslint:disable-next-line:no-console
-    console.log(e.response.data)
     return e
   }
 }
