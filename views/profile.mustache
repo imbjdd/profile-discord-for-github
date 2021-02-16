@@ -1,0 +1,55 @@
+<svg width="250" height="142" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <foreignObject width="250" height="142">
+    <style>
+      @font-face {
+        font-family: Whitney;
+        src: url("/whitneysemibold.otf") format("opentype");
+      }
+
+      .container {
+        border-radius: 5px;
+        background-color: #202225;
+        height: 100%;
+        width: 100%;
+      }
+
+      .main {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .avatarWrapper {
+        margin-bottom: 12px;
+        height: 80px;
+        width: 80px;
+      }
+
+      .avatar {
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+      }
+
+      .textWrapper {
+        color: #fff;
+        font-family: Whitney;
+      }
+    </style>
+
+    <div xmlns="http://www.w3.org/1999/xhtml" class="container">
+
+      <div class="main">
+        <div class="avatarWrapper">
+          <img class="avatar" src="https://cdn.discordapp.com/avatars/{{id}}/{{avatar}}.png?size=128">
+          </img>
+        </div>
+        <div class="textWrapper">
+          <span>{{username}}</span><span style="color:#b9bbbe;">#{{tag}}</span>
+        </div>
+      </div>
+
+    </div>
+  </foreignObject>
+</svg>
