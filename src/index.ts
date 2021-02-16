@@ -19,7 +19,7 @@ app.get('/api/profile', (req, res) => {
   };
 
   const text = fs.readFileSync('views/profile.mustache','utf8')
-  const output = mustache.render(text, view);
+  const output = mustache.render(text, view)
 
   res.writeHead(200, {
    'Content-Type': 'image/svg+xml',
