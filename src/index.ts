@@ -1,13 +1,13 @@
-import express from 'express';
-import fs from 'fs';
-import mustache from 'mustache';
-const app = express();
-const port = 8080;
+import express from 'express'
+import fs from 'fs'
+import mustache from 'mustache'
+const app = express()
+const port = 8080
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.send("Hello world!");
+  res.send("Hello world!")
 })
 
 app.get('/api/profile', (req, res) => {
