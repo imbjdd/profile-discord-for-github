@@ -103,6 +103,15 @@ async function getUserInfo(ACCESS_TOKEN: string) {
   }
 }
 
+async function getAvatar(data: object) {
+  try {
+    const response = await axios.get('https://cdn.discordapp.com/avatars/'+data.id+'/'+data.avatar+'.png')
+    return 'data:'+response.headers['content-type']+';base64,'+Buffer.from(response.data).toString('base64')
+  } catch (e) {
+    return e
+  }
+}
+
 async function getRefreshTokenLocal() {
   const doc: RefreshTokenInterface | any = await RefreshToken.findOne()
 
@@ -125,7 +134,8 @@ app.get('/api/profile', async (req, res) => {
   const REFRESH_TOKEN = await getRefreshTokenLocal()
   const ACCESS_TOKEN = await getAccessToken(REFRESH_TOKEN.trim())
   const USER_INFO = await getUserInfo(ACCESS_TOKEN)
-  const AWESOME_SVG = await getSvg(USER_INFO)
+  const AWESOME_AVATAR = await getAvatar(USER_INFO)
+  const AWESOME_SVG = await getSvg({...USER_INFO, 'AWESOME_AVATAR' : AWESOME_AVATAR})
 
   res.writeHead(200, {
    'Content-Type': 'image/svg+xml',
