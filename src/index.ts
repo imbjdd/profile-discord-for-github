@@ -103,7 +103,7 @@ async function getUserInfo(ACCESS_TOKEN: string) {
   }
 }
 
-async function getAvatar(data: object) {
+async function getAvatar(data: any) {
   try {
     const response = await axios.get('https://cdn.discordapp.com/avatars/'+data.id+'/'+data.avatar+'.png')
     return 'data:'+response.headers['content-type']+';base64,'+Buffer.from(response.data).toString('base64')
