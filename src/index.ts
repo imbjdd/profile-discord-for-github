@@ -10,6 +10,35 @@ const GET_TOKEN_URL = 'https://discord.com/api/v8/oauth2/token'
 const INFO_TOKEN_URL = 'https://discord.com/api/v8/users/@me'
 const REDIRECT_URI = 'http://localhost:1234/callback/'
 
+import mongoose from 'mongoose';
+
+mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+
+const RefreshTokenSchema = new mongoose.Schema(
+  {
+    token: String
+  }
+);
+
+const RefreshToken = mongoose.model('refreshtoken', RefreshTokenSchema);
+
+interface RefreshTokenInterface extends mongoose.Document {
+  token: string;
+}
+
+async function storeRefreshToken(token: string) {
+  const doc: RefreshTokenInterface | any = await RefreshToken.findOne()
+
+  if(!doc) {
+    const kitty = new RefreshToken({ token })
+    kitty.save()
+  }
+  else {
+    doc.token = token
+    doc.save()
+  }
+}
+
 async function getAccessToken(REFRESH_TOKEN: string) {
   const params = new URLSearchParams()
   params.append('client_id', process.env.CLIENT_ID)
@@ -74,12 +103,11 @@ async function getUserInfo(ACCESS_TOKEN: string) {
   }
 }
 
-function getRefreshTokenLocal() {
-  try {
-    return fs.readFileSync('REFRESH_TOKEN','utf8')
-  } catch (error) {
-    return process.env.REFRESH_TOKEN
-  }
+async function getRefreshTokenLocal() {
+  const doc: RefreshTokenInterface | any = await RefreshToken.findOne()
+
+  if(!doc) return process.env.REFRESH_TOKEN
+  return doc.token
 }
 
 function getSvg(view: object) {
