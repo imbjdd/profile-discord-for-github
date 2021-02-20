@@ -4,7 +4,8 @@
 </div>
 
 <div align="center">
-    <img src="https://profile-discord-for-github.herokuapp.com/api/profile?up" alt="Here's an example"/><br/><br/>
+    <img src="https://profile-discord-for-github.herokuapp.com/api/profile?up" alt="Here's an example"/>
+    <p>Here's an example of what you will get.</p>
     <img src="https://img.shields.io/github/stars/6346563751/profile-discord-for-github?style=social" alt="Star the repo"/>
 </div>
 
