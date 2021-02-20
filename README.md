@@ -1,4 +1,6 @@
-# Profile Discord for GitHub ![GitHub Repo stars](https://img.shields.io/github/stars/6346563751/profile-discord-for-github?style=social)
+<div align="center">
+  <h1>Profile Discord for GitHub</h1>
+</div>
 
 This is a simplest way to link in realtime your Discord profile to any readme. The data (avatar and photo) are taken in real time.
 
@@ -15,6 +17,8 @@ This is a simplest way to link in realtime your Discord profile to any readme. T
 7. You will be redirected on a link like that `http://localhost:1234/callback/?code=yjV0ACm2MweJzxMwY5VA2qCcNrnFVT`, copy the last part `http://localhost:1234/callback/?code={{code}}`, the element `code` and go on `https://yourapp.herokuapp.com/api/exchange_code?code={{code}}`.
 8. Now, store the `refresh_token` variable, create and env variable called `REFRESH_TOKEN` and put in.
 9. The setup is finished, congratulations ! 🎉🎉 Your image link is `https://yourapp.herokuapp.com/api/profile`.
+
+![Felicitation gif](https://media.giphy.com/media/14cDsqOkks6O8U/giphy.gif)
 
 ## License
 [Unlicense](https://choosealicense.com/licenses/unlicense/)
