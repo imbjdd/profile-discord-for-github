@@ -5,6 +5,7 @@
 
 <div align="center">
     <img src="https://profile-discord-for-github.herokuapp.com/api/profile?up"/>
+    <img src="https://img.shields.io/badge/follow-on%20twitter-4AA1EC.svg" alt="Follow us on Twitter">
 </div>
 
 ## Setup (~10-15 minutes)
