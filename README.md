@@ -1,10 +1,11 @@
 <div align="center">
-  <h1>Profile Discord for GitHub <img src="https://img.shields.io/github/stars/6346563751/profile-discord-for-github?style=social"></h1>
+  <h1>Profile Discord for GitHub <img src="https://img.shields.io/github/stars/6346563751/profile-discord-for-github?style=social"/></h1>
+  <p>This is a simplest way to link in realtime your Discord profile to any readme. The data (avatar and photo) are taken in real time.</p>
 </div>
 
-This is a simplest way to link in realtime your Discord profile to any readme. The data (avatar and photo) are taken in real time.
-
-![Discord Profile](https://profile-discord-for-github.herokuapp.com/api/profile?up)
+<div align="center">
+    <img src="https://profile-discord-for-github.herokuapp.com/api/profile?up"/>
+</div>
 
 ## Setup (~10-15 minutes)
 
