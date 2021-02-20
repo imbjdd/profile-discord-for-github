@@ -10,7 +10,7 @@ const GET_TOKEN_URL = 'https://discord.com/api/v8/oauth2/token'
 const INFO_TOKEN_URL = 'https://discord.com/api/v8/users/@me'
 const REDIRECT_URI = 'http://localhost:1234/callback/'
 
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 
@@ -18,12 +18,12 @@ const RefreshTokenSchema = new mongoose.Schema(
   {
     token: String
   }
-);
+)
 
 const RefreshToken = mongoose.model('refreshtoken', RefreshTokenSchema);
 
 interface RefreshTokenInterface extends mongoose.Document {
-  token: string;
+  token: string
 }
 
 async function storeRefreshToken(token: string) {
