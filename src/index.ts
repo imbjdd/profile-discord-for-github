@@ -1,3 +1,8 @@
+/**
+ * The code is very short and was done in only one day.
+ * If there are any bugs, please let me know.
+ */
+
 import express from 'express'
 const app = express()
 const port = process.env.PORT || 3000
@@ -10,9 +15,18 @@ const GET_TOKEN_URL = 'https://discord.com/api/v8/oauth2/token'
 const INFO_TOKEN_URL = 'https://discord.com/api/v8/users/@me'
 const REDIRECT_URI = 'http://localhost:1234/callback/'
 
-import mongoose from 'mongoose'
+declare var process : {
+  env: {
+    MONGODB_URL: string,
+    PORT: number,
+    CLIENT_ID: string,
+    CLIENT_SECRET: string,
+    REFRESH_TOKEN: string
+  }
+}
 
-mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+import mongoose from 'mongoose'
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const RefreshTokenSchema = new mongoose.Schema(
   {
@@ -26,10 +40,15 @@ interface RefreshTokenInterface extends mongoose.Document {
   token: string
 }
 
+/**
+ * Stores the refreshtoken given.
+ *
+ * @param token - The refreshtoken to store
+ */
 async function storeRefreshToken(token: string) {
   const doc: RefreshTokenInterface | any = await RefreshToken.findOne()
 
-  if(!doc) {
+  if (!doc) {
     const kitty = new RefreshToken({ token })
     kitty.save()
   }
@@ -39,6 +58,12 @@ async function storeRefreshToken(token: string) {
   }
 }
 
+/**
+ * Returns an accesstoken from a refreshtoken
+ *
+ * @param REFRESH_TOKEN - A refreshtoken.
+ * @returns The accesstoken
+ */
 async function getAccessToken(REFRESH_TOKEN: string) {
   const params = new URLSearchParams()
   params.append('client_id', process.env.CLIENT_ID)
@@ -63,6 +88,12 @@ async function getAccessToken(REFRESH_TOKEN: string) {
   }
 }
 
+/**
+ * Returns a refreshtoken
+ *
+ * @param code - The code gets from oauth2's callback
+ * @returns The accesstoken
+ */
 async function getRefreshToken(code: string) {
   const params = new URLSearchParams()
   params.append('client_id', process.env.CLIENT_ID)
@@ -86,9 +117,15 @@ async function getRefreshToken(code: string) {
   }
 }
 
+/**
+ * Returns user info from an accesstoken
+ *
+ * @param ACCESS_TOKEN - The accesstoken to check
+ * @returns User object
+ */
 async function getUserInfo(ACCESS_TOKEN: string) {
   const config = {
-    headers : {
+    headers: {
       Authorization: 'Bearer ' + ACCESS_TOKEN
     }
   }
@@ -103,24 +140,41 @@ async function getUserInfo(ACCESS_TOKEN: string) {
   }
 }
 
+/**
+ * Returns avatar of a given user
+ *
+ * @param data - The datas of the user to get avatar
+ * @returns Avatar of user's data in base64
+ */
 async function getAvatar(data: any) {
   try {
-    const response = await axios.get('https://cdn.discordapp.com/avatars/'+data.id+'/'+data.avatar+'.png', {responseType: 'arraybuffer'})
+    const response = await axios.get('https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '.png', { responseType: 'arraybuffer' })
     return Buffer.from(response.data).toString('base64');
   } catch (e) {
     return e
   }
 }
 
+/**
+ * Checks database and environment varaibles
+ *
+ * @returns refreshtoken
+ */
 async function getRefreshTokenLocal() {
   const doc: RefreshTokenInterface | any = await RefreshToken.findOne()
 
-  if(!doc) return process.env.REFRESH_TOKEN
+  if (!doc) return process.env.REFRESH_TOKEN
   return doc.token
 }
 
+/**
+ * Returns profile's svg
+ *
+ * @param view - The datas of the user
+ * @returns Svg of the user given
+ */
 function getSvg(view: object) {
-  const text = fs.readFileSync('views/profile.mustache','utf8')
+  const text = fs.readFileSync('views/profile.mustache', 'utf8')
   return mustache.render(text, view)
 }
 
@@ -135,24 +189,24 @@ app.get('/api/profile', async (req, res) => {
   const ACCESS_TOKEN = await getAccessToken(REFRESH_TOKEN.trim())
   const USER_INFO = await getUserInfo(ACCESS_TOKEN)
   const AWESOME_AVATAR = await getAvatar(USER_INFO)
-  const AWESOME_SVG = await getSvg({...USER_INFO, 'AWESOME_AVATAR' : AWESOME_AVATAR})
+  const AWESOME_SVG = await getSvg({ ...USER_INFO, 'AWESOME_AVATAR': AWESOME_AVATAR })
 
   res.writeHead(200, {
-   'Content-Type': 'image/svg+xml',
-   'Content-Length': AWESOME_SVG.length,
-   'Cache-Control': 's-maxage=1'
+    'Content-Type': 'image/svg+xml',
+    'Content-Length': AWESOME_SVG.length,
+    'Cache-Control': 's-maxage=1'
   })
 
   res.end(AWESOME_SVG)
 })
 
 app.get('/api/exchange_code', async (req, res) => {
-  const code: string = req.query.code.toString()
+  const code: string = req.query!.code!.toString()
   const data = await getRefreshToken(code)
   res.send(data)
 })
 
 app.listen(port, () => {
   // tslint:disable-next-line:no-console
-  console.log('server started at http://localhost:'+port)
+  console.log('server started at http://localhost:' + port)
 })
