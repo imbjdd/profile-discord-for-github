@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Profile Discord for GitHub <img src="https://img.shields.io/github/stars/6346563751/profile-discord-for-github?style=social" alt="Star the repo"/></h1>
-  <p>This is a simplest way to link in realtime your Discord profile to any readme. The data (avatar and photo) are taken in real time.</p>
+  <p>This is a simplest way to link in realtime your Discord profile to any readme. The data (username and picture's profile) are taken in real time.</p>
 </div>
 
 <div align="center">
